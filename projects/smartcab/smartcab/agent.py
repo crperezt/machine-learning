@@ -103,7 +103,6 @@ class LearningAgent(Agent):
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
         if state not in self.Q:
-            print "Q is: " + str(self.Q)
             self.Q.update([(state, {None:0.0, 'forward':0.0, 'left':0.0, 'right':0.0})])
         return
 
@@ -116,6 +115,8 @@ class LearningAgent(Agent):
         self.state = state
         self.next_waypoint = self.planner.next_waypoint()
         action = None
+        maxQvalue = 0.0
+        possible_actions = []
 
         ########### 
         ## TO DO ##
@@ -128,7 +129,11 @@ class LearningAgent(Agent):
         elif random.random() < self.epsilon:
             action = self.valid_actions[random.randint(0,3)]
         else:
-            action = max(self.Q[state],key=self.Q[state].get)
+            maxQvalue = self.get_maxQ(state)
+            for s, v in self.Q[state].iteritems():
+                if v == maxQvalue:
+                    possible_actions.append(s)
+            action = random.sample(possible_actions,1)[0]
         return action
 
 
@@ -144,7 +149,7 @@ class LearningAgent(Agent):
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         self.createQ(state)
 
-        self.Q[state].update([(action,self.Q[state][action]*(1-self.alpha) + reward*self.alpha)])
+        self.Q[state][action] = self.Q[state][action]*(1-self.alpha) + reward*self.alpha
 
         return
 
