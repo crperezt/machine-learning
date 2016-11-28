@@ -72,7 +72,7 @@ class LearningAgent(Agent):
         #   For each action, set the Q-value for the state-action pair to 0
         state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'])
         
-        if learning == True:
+        if self.learning == True:
             self.createQ(state)
         
         return state
@@ -149,7 +149,7 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        if learning == True:
+        if self.learning == True:
             self.Q[state][action] = self.Q[state][action]*(1-self.alpha) + reward*self.alpha
         return
 
@@ -201,7 +201,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, update_delay = 0.001, log_metrics = True, optimized=True)
+    sim = Simulator(env, update_delay = 0.001, log_metrics = False, optimized=True)
     
     ##############
     # Run the simulator
