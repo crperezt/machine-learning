@@ -16347,6 +16347,7 @@ This Q-learner is much improved over the prior learner, with a very low violatio
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>Future rewards wouldn't work in this scenario because the smartcab does not have enough information to know whether a future state is closer or farther to the destination, it only tries to move towards the waypoint. There is only a single waypoint direction, therefore, any future reward consideration would not help it reach the destination faster.</p>
+<p>Furthermore, the starting point and the destination change with every trial. Therefore, trying to learn an optimal direction at a particular intersection to arrive faster would not work because the destination will be in a different location every time.</p>
 
 </div>
 </div>
