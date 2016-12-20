@@ -1,6 +1,9 @@
 # Mac OS
 .DS_Store
 
+# Data
+projects/trading_capstone/SEC-Edgar-Data/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
